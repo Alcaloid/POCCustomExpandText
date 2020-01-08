@@ -17,6 +17,7 @@ class CustomExpandText @JvmOverloads constructor(
 
     companion object {
         private const val DEFAULT_IS_EXPAND = false
+        private const val DEFAULT_NEED_EXPAND_ONE_TIME = false
         private const val DEFAULT_MAX_LINE = 3
         private const val DEFAULT_EXPAND_TEXT = "... See More"
         private const val DEFAULT_EXPAND_Color = Color.BLUE
@@ -36,18 +37,26 @@ class CustomExpandText @JvmOverloads constructor(
     private var expandMaxLine: Int = DEFAULT_MAX_LINE
     private var expandMoreText: String = DEFAULT_EXPAND_TEXT
     private var expandMoreColor: Int = DEFAULT_EXPAND_Color
+    private var needExpandOneTime: Boolean = DEFAULT_NEED_EXPAND_ONE_TIME
+    private var expandOneTime: Boolean = false
     private var originalText: CharSequence? = null
 
     init {
         initAttribute(context, attrs)
         setOnClickListener {
-            isExpand = !isExpand
-            updateText()
+            if (!expandOneTime){
+                isExpand = !isExpand
+                updateText()
+            }
         }
     }
 
     fun setMaxLine(limitLine: Int) {
         expandMaxLine = limitLine
+    }
+
+    fun setExpandOneTime(state: Boolean) {
+        needExpandOneTime = state
     }
 
     fun setExpandMoreText(text: String) {
@@ -67,6 +76,9 @@ class CustomExpandText @JvmOverloads constructor(
 
     private fun updateText() {
         if (isExpand) {
+            if (needExpandOneTime){
+                expandOneTime = true
+            }
             maxLines = Int.MAX_VALUE //set to control when user scroll
             makeTextViewResizable(Int.MAX_VALUE)
         } else {
@@ -91,7 +103,7 @@ class CustomExpandText @JvmOverloads constructor(
                 }
                 val wordMore = SpannableString(expandText).also {
                     it.setSpan(
-                        ForegroundColorSpan(Color.BLUE),
+                        ForegroundColorSpan(expandMoreColor),
                         0,
                         it.length,
                         Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
@@ -113,6 +125,11 @@ class CustomExpandText @JvmOverloads constructor(
                 it.getInt(R.styleable.ExpandableTextView_expandableMaxLine, DEFAULT_MAX_LINE)
             isExpand =
                 it.getBoolean(R.styleable.ExpandableTextView_expandableIsExpand, DEFAULT_IS_EXPAND)
+            needExpandOneTime =
+                it.getBoolean(
+                    R.styleable.ExpandableTextView_expandableCanExpand,
+                    DEFAULT_NEED_EXPAND_ONE_TIME
+                )
             expandMoreText = it.getString(
                 R.styleable.ExpandableTextView_expandableText
             ) ?: DEFAULT_EXPAND_TEXT

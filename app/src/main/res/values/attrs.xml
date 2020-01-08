@@ -3,6 +3,7 @@
     <declare-styleable name="ExpandableTextView">
         <attr name="expandableMaxLine" format="integer" />
         <attr name="expandableIsExpand" format="integer" />
+        <attr name="expandableCanExpand" format="integer" />
         <attr name="expandableColorText" format="integer" />
         <attr name="expandableText" format="string" />
 

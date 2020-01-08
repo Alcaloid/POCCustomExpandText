@@ -1,5 +1,6 @@
 package com.poc.custom.expandtext
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -93,6 +94,8 @@ class MainActivity : AppCompatActivity() {
         ) {
             expTextView.setExpandableText(data.deteail)
             expTextView.isExpand = data.isExpand
+            expTextView.setExpandOneTime(true)
+            expTextView.setExpandMoreColor(Color.RED)
             expTextView.onStateChangeListener = { oldState, newState ->
                 onUpdate.invoke(newState)
             }
