@@ -25,7 +25,7 @@ class CustomExpandText @JvmOverloads constructor(
     var onStateChangeListener: (CustomExpandText.(oldState2: Boolean, newState2: Boolean) -> Unit)? =
         null
 
-    private var isExpand = DEFAULT_IS_EXPAND
+    var isExpand = DEFAULT_IS_EXPAND
         set(value) {
             if (field != value) {
                 onStateChangeListener?.let { it(field, value) }
