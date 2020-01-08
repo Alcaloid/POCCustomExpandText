@@ -34,53 +34,91 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun createRecycleView(){
+    private fun createRecycleView() {
         rvExp.adapter = MyAdapter()
         rvExp.layoutManager = LinearLayoutManager(this)
     }
 
 
-    class MyAdapter : RecyclerView.Adapter<MyViewHolder>() {
+    class MyAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-
-        private val fakeList = listOf<SampleDate>(
-
-            SampleDate(TEXT_FULL),
-            SampleDate(TEXT_FULL),
-            SampleDate(TEXT_SHORT),
-            SampleDate(TEXT_NEW_LINE),
-            SampleDate(TEXT_FULL),
-            SampleDate(TEXT_FULL),
-            SampleDate(TEXT_FULL),
-            SampleDate(TEXT_SHORT),
-            SampleDate(TEXT_FULL),
-            SampleDate(TEXT_NEW_LINE),
-            SampleDate(TEXT_FULL),
-            SampleDate(TEXT_FULL),
-            SampleDate(TEXT_NEW_LINE),
-            SampleDate(TEXT_FULL),
-            SampleDate(TEXT_SHORT),
-            SampleDate(TEXT_NEW_LINE),
-            SampleDate(TEXT_FULL),
-            SampleDate(TEXT_FULL),
-            SampleDate(TEXT_SHORT),
-            SampleDate(TEXT_SHORT),
-            SampleDate(TEXT_FULL)
+        private val fakeList = listOf<DynamicTypeData>(
+            DynamicTypeData.ImageData(),
+            DynamicTypeData.SampleDate(TEXT_FULL),
+            DynamicTypeData.SampleDate(TEXT_FULL),
+            DynamicTypeData.SampleDate(TEXT_SHORT),
+            DynamicTypeData.SampleDate(TEXT_NEW_LINE),
+            DynamicTypeData.SampleDate(TEXT_FULL),
+            DynamicTypeData.ImageData(),
+            DynamicTypeData.SampleDate(TEXT_FULL),
+            DynamicTypeData.SampleDate(TEXT_FULL),
+            DynamicTypeData.SampleDate(TEXT_SHORT),
+            DynamicTypeData.SampleDate(TEXT_FULL),
+            DynamicTypeData.SampleDate(TEXT_NEW_LINE),
+            DynamicTypeData.SampleDate(TEXT_FULL),
+            DynamicTypeData.SampleDate(TEXT_FULL),
+            DynamicTypeData.SampleDate(TEXT_NEW_LINE),
+            DynamicTypeData.SampleDate(TEXT_FULL),
+            DynamicTypeData.SampleDate(TEXT_SHORT),
+            DynamicTypeData.SampleDate(TEXT_NEW_LINE),
+            DynamicTypeData.SampleDate(TEXT_FULL),
+            DynamicTypeData.SampleDate(TEXT_FULL),
+            DynamicTypeData.SampleDate(TEXT_SHORT),
+            DynamicTypeData.SampleDate(TEXT_SHORT),
+            DynamicTypeData.SampleDate(TEXT_FULL)
 
         )
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-           return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_sample_expand,parent,false))
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+
+            return when (viewType) {
+                R.layout.item_sample_expand -> {
+                    MyViewHolder(
+                        LayoutInflater.from(parent.context).inflate(
+                            R.layout.item_sample_expand,
+                            parent,
+                            false
+                        )
+                    )
+                }
+                else -> {
+                    MyViewHolderImage(
+                        LayoutInflater.from(parent.context).inflate(
+                            R.layout.item_image_detail,
+                            parent,
+                            false
+                        )
+                    )
+                }
+            }
+
+        }
+
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+
+            when (fakeList[position]) {
+                is DynamicTypeData.SampleDate -> {
+                    val data = fakeList[position] as DynamicTypeData.SampleDate
+                    val sampleHoleder = holder as MyViewHolder
+                    sampleHoleder.bindPosition(data) {
+                        data.isExpand = it
+                    }
+                    sampleHoleder.setIsRecyclable(false)
+
+                }
+                is DynamicTypeData.ImageData -> {
+
+                }
+            }
         }
 
         override fun getItemCount(): Int = fakeList.size
 
-        override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-            holder.bindPosition(fakeList[position]){
-                fakeList[position].isExpand = it
+        override fun getItemViewType(position: Int): Int {
+            return when (fakeList[position]) {
+                is DynamicTypeData.SampleDate -> R.layout.item_sample_expand
+                else -> R.layout.item_image_detail
             }
-
-            holder.setIsRecyclable(false)
         }
 
     }
@@ -89,7 +127,7 @@ class MainActivity : AppCompatActivity() {
         private val expTextView: CustomExpandText = iv.tvExp
 
         fun bindPosition(
-            data: SampleDate,
+            data: DynamicTypeData.SampleDate,
             onUpdate: (newState: Boolean) -> Unit
         ) {
             expTextView.setExpandableText(data.deteail)
@@ -103,5 +141,16 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    data class SampleDate(val deteail: String, var isExpand: Boolean = false)
+
+    class MyViewHolderImage(private val iv: View) : RecyclerView.ViewHolder(iv) {
+
+    }
+
+    sealed class DynamicTypeData {
+        data class SampleDate(val deteail: String, var isExpand: Boolean = false) :
+            DynamicTypeData()
+
+        data class ImageData(val deteail: String = "") : DynamicTypeData()
+
+    }
 }
