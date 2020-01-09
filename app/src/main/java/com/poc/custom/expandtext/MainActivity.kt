@@ -1,11 +1,10 @@
 package com.poc.custom.expandtext
 
-import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.poc.custom.expandtext.ui.CustomExpandText
@@ -24,7 +23,18 @@ class MainActivity : AppCompatActivity() {
                     "By stating expectations, interactions, and assertions without directly accessing the underlying app’s activities and views, this structure prevents test flakiness and optimizes test run speed."
         const val TEXT_SHORT =
             "Espresso Test Recorder then takes the saved recording and automatically"
+        const val TEXT_LINE_SHORT =
+            "Text messages are used for personal, family, business and social purposes. Governmental and non-governmental organizations use text messaging for communication between colleagues.\n" +
+                    " In the 2010s, the sending of short informal messages has become an accepted part of many cultures, as happened earlier with emailing.[1] This makes texting a quick and easy way to communicate with friends, \n" +
+                    "family and colleagues, including in contexts where a call would be impolite or inappropriate (e.g., calling very late at night or when one knows the other person is busy with family or work activities). " +
+                    "Like e-mail and voicemail and unlike calls (in which the caller hopes to speak directly with the recipient), " +
+                    "texting does not require the caller and recipient to both be free at the same moment; this permits communication even between busy individuals. " +
+                    "Text messages can also be used to interact with automated systems, for example, to order products or services from e-commerce websites, or to participate in online contests. " +
+                    "Advertisers and service providers use direct text marketing to send messages to mobile users about promotions, payment due dates, and other notifications instead of using postal mail, email, or voicemail."
         const val TEXT_NEW_LINE = "Start\n2\n3\n4\n5\nEnd"
+        const val TEXT_THAI = "ขอให้ช่วงเวลาอันแสนดีของปีนี้\n" +
+                "โอบวันคืนของเธอให้อุ่นด้วยความงดงาม\n" +
+                "ความรักและความสุข สุขสันต์วันคริสต์มาส และสวัสดีปีใหม่"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +57,8 @@ class MainActivity : AppCompatActivity() {
             DynamicTypeData.SampleDate(TEXT_FULL),
             DynamicTypeData.SampleDate(TEXT_FULL),
             DynamicTypeData.SampleDate(TEXT_SHORT),
+            DynamicTypeData.SampleDate(TEXT_LINE_SHORT),
+            DynamicTypeData.SampleDate(TEXT_THAI),
             DynamicTypeData.SampleDate(TEXT_NEW_LINE),
             DynamicTypeData.SampleDate(TEXT_FULL),
             DynamicTypeData.ImageData(),
@@ -132,8 +144,6 @@ class MainActivity : AppCompatActivity() {
         ) {
             expTextView.setExpandableText(data.deteail)
             expTextView.isExpand = data.isExpand
-            expTextView.setExpandOneTime(true)
-            expTextView.setExpandMoreColor(Color.RED)
             expTextView.onStateChangeListener = { oldState, newState ->
                 onUpdate.invoke(newState)
             }
