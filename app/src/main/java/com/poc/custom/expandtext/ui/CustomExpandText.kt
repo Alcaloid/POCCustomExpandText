@@ -44,7 +44,7 @@ class CustomExpandText @JvmOverloads constructor(
     init {
         initAttribute(context, attrs)
         setOnClickListener {
-            if (!expandOneTime){
+            if (!expandOneTime) {
                 isExpand = !isExpand
                 updateText()
             }
@@ -76,7 +76,7 @@ class CustomExpandText @JvmOverloads constructor(
 
     private fun updateText() {
         if (isExpand) {
-            if (needExpandOneTime){
+            if (needExpandOneTime) {
                 expandOneTime = true
             }
             maxLines = Int.MAX_VALUE //set to control when user scroll
@@ -98,7 +98,7 @@ class CustomExpandText @JvmOverloads constructor(
                 } else {
                     textView.text.subSequence(
                         0,
-                        lineEndIndex - expandText.length + 1
+                        lineEndIndex - expandText.length
                     ).toString()
                 }
                 val wordMore = SpannableString(expandText).also {
