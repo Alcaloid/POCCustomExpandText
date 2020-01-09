@@ -8,8 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.poc.custom.expandtext.ui.CustomExpandText
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.item_sample_expand.view.*
+import kotlinx.android.synthetic.main.activity_main.rvExp
+import kotlinx.android.synthetic.main.item_recommand_detail.view.tvExp
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,6 +32,11 @@ class MainActivity : AppCompatActivity() {
                     "Text messages can also be used to interact with automated systems, for example, to order products or services from e-commerce websites, or to participate in online contests. " +
                     "Advertisers and service providers use direct text marketing to send messages to mobile users about promotions, payment due dates, and other notifications instead of using postal mail, email, or voicemail."
         const val TEXT_NEW_LINE = "Start\n2\n3\n4\n5\nEnd"
+        const val TEXT_NO_SPACE =
+            "SoeiIsGoingtothestromtogettheligthingofangryTeraTheLinghtingofTeraisverydestrotionabiltyitveryscraeifittouchmaybeskillbutSoAiisdon'tcareShewantlinghtingSomuchbeacuseofshewantitSoeiIsGoingtothestromtogettheligthingofangryTeraTheLinghtingofTeraisverydestrotionabiltyitveryscraeifittouchmaybeskillbutSoAiisdon'tcareShewantlinghtingSomuchbeacuseofshewantitSoeiIsGoingtothestromtogettheligthingofangryTeraTheLinghtingofTeraisverydestrotionabiltyitveryscraeifittouchmaybeskillbutSoAiisdon'tcareShewantlinghtingSomuchbeacuseofshewantit"
+        //            "lfpdmafklamdfklamfkamf;amdf;klankljfbnajfnajnfanodfm;ajfiajifjaiofhafnljahbfdjbzlcnlznczlknclzknclkzncklznczcnzclkzncklajkhfbhasbfhbafhsabfklabfkabnfkjnajkfnajnfoanfoanodifanofnasipufnasoufnaonfoasnfoadnfnaoufndaounfouasnfopuanfopsau"
+        const val TEXT_NO_SPACE_THAI =
+            "กกกฟทกสาฟกืฟ่กหืฟส่ากืฟาสดิืฟ่าดืฟ่ากืฟกรนๆไยืกื่สฟกหกืฟวสากทฟาสดืทฟาสวดืวฟสกืฟสวากืสาฟืก่หกนืฟน่กืฟสกืสฟืกสาฟืดสฟดส่ฟืดส่ฟืนืไนืฟ่กืฟสกืฟสกืทสฟากาสฟืดรนฟืดฟื่ฟสืกฟสากืฟาสวกืาฟืดาฟสืกาสฟืกาสฟืกรฟืกรนไ่ๆรกทๆทกนืด่ฟแฟสปส่ฟืกนฟืกดรฟทกฟทาสกืฟสากืฟกกานฟหืกนฟืกนรืๆนืกนๆืืสฟืกสฟ "
         const val TEXT_THAI = "ขอให้ช่วงเวลาอันแสนดีของปีนี้\n" +
                 "โอบวันคืนของเธอให้อุ่นด้วยความงดงาม\n" +
                 "ความรักและความสุข สุขสันต์วันคริสต์มาส และสวัสดีปีใหม่"
@@ -58,6 +63,8 @@ class MainActivity : AppCompatActivity() {
             DynamicTypeData.SampleDate(TEXT_FULL),
             DynamicTypeData.SampleDate(TEXT_SHORT),
             DynamicTypeData.SampleDate(TEXT_LINE_SHORT),
+            DynamicTypeData.SampleDate(TEXT_NO_SPACE),
+            DynamicTypeData.SampleDate(TEXT_NO_SPACE_THAI),
             DynamicTypeData.SampleDate(TEXT_THAI),
             DynamicTypeData.SampleDate(TEXT_NEW_LINE),
             DynamicTypeData.SampleDate(TEXT_FULL),
@@ -84,10 +91,12 @@ class MainActivity : AppCompatActivity() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
             return when (viewType) {
-                R.layout.item_sample_expand -> {
+                R.layout.item_recommand_detail -> {
+                    //R.layout.item_sample_expand -> {
                     MyViewHolder(
                         LayoutInflater.from(parent.context).inflate(
-                            R.layout.item_sample_expand,
+                            R.layout.item_recommand_detail,
+                            //R.layout.item_sample_expand,
                             parent,
                             false
                         )
@@ -128,7 +137,7 @@ class MainActivity : AppCompatActivity() {
 
         override fun getItemViewType(position: Int): Int {
             return when (fakeList[position]) {
-                is DynamicTypeData.SampleDate -> R.layout.item_sample_expand
+                is DynamicTypeData.SampleDate -> R.layout.item_recommand_detail//R.layout.item_sample_expand
                 else -> R.layout.item_image_detail
             }
         }
@@ -136,7 +145,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     class MyViewHolder(private val iv: View) : RecyclerView.ViewHolder(iv) {
-        private val expTextView: CustomExpandText = iv.tvExp
+        private val expTextView: CustomExpandText = iv.tvExp//iv.tvExp
 
         fun bindPosition(
             data: DynamicTypeData.SampleDate,

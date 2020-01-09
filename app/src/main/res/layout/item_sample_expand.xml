@@ -13,21 +13,10 @@
         android:padding="4dp"
         android:textStyle="bold"/>
 
-    <RatingBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/CustomRatingBar"
-        android:visibility="gone"
-        android:id="@+id/rate"
-        android:rating="4"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"/>
-
-
     <com.poc.custom.expandtext.ui.CustomExpandText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tvExp"
+        android:id="@+id/tvExp2"
         app:expandableMaxLine="3"/>
 
     <View
