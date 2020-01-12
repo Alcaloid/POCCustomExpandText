@@ -1,15 +1,20 @@
 package com.poc.custom.expandtext
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.poc.custom.expandtext.ui.CustomExpandText
-import kotlinx.android.synthetic.main.activity_main.rvExp
-import kotlinx.android.synthetic.main.item_recommand_detail.view.tvExp
+import com.poc.custom.expandtext.ui.DividerItemDecorationWithStartMargin
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.item_contain_main.view.*
+import kotlinx.android.synthetic.main.item_sample_expand.view.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,11 +37,6 @@ class MainActivity : AppCompatActivity() {
                     "Text messages can also be used to interact with automated systems, for example, to order products or services from e-commerce websites, or to participate in online contests. " +
                     "Advertisers and service providers use direct text marketing to send messages to mobile users about promotions, payment due dates, and other notifications instead of using postal mail, email, or voicemail."
         const val TEXT_NEW_LINE = "Start\n2\n3\n4\n5\nEnd"
-        const val TEXT_NO_SPACE =
-            "SoeiIsGoingtothestromtogettheligthingofangryTeraTheLinghtingofTeraisverydestrotionabiltyitveryscraeifittouchmaybeskillbutSoAiisdon'tcareShewantlinghtingSomuchbeacuseofshewantitSoeiIsGoingtothestromtogettheligthingofangryTeraTheLinghtingofTeraisverydestrotionabiltyitveryscraeifittouchmaybeskillbutSoAiisdon'tcareShewantlinghtingSomuchbeacuseofshewantitSoeiIsGoingtothestromtogettheligthingofangryTeraTheLinghtingofTeraisverydestrotionabiltyitveryscraeifittouchmaybeskillbutSoAiisdon'tcareShewantlinghtingSomuchbeacuseofshewantit"
-        //            "lfpdmafklamdfklamfkamf;amdf;klankljfbnajfnajnfanodfm;ajfiajifjaiofhafnljahbfdjbzlcnlznczlknclzknclkzncklznczcnzclkzncklajkhfbhasbfhbafhsabfklabfkabnfkjnajkfnajnfoanfoanodifanofnasipufnasoufnaonfoasnfoadnfnaoufndaounfouasnfopuanfopsau"
-        const val TEXT_NO_SPACE_THAI =
-            "กกกฟทกสาฟกืฟ่กหืฟส่ากืฟาสดิืฟ่าดืฟ่ากืฟกรนๆไยืกื่สฟกหกืฟวสากทฟาสดืทฟาสวดืวฟสกืฟสวากืสาฟืก่หกนืฟน่กืฟสกืสฟืกสาฟืดสฟดส่ฟืดส่ฟืนืไนืฟ่กืฟสกืฟสกืทสฟากาสฟืดรนฟืดฟื่ฟสืกฟสากืฟาสวกืาฟืดาฟสืกาสฟืกาสฟืกรฟืกรนไ่ๆรกทๆทกนืด่ฟแฟสปส่ฟืกนฟืกดรฟทกฟทาสกืฟสากืฟกกานฟหืกนฟืกนรืๆนืกนๆืืสฟืกสฟ "
         const val TEXT_THAI = "ขอให้ช่วงเวลาอันแสนดีของปีนี้\n" +
                 "โอบวันคืนของเธอให้อุ่นด้วยความงดงาม\n" +
                 "ความรักและความสุข สุขสันต์วันคริสต์มาส และสวัสดีปีใหม่"
@@ -51,52 +51,81 @@ class MainActivity : AppCompatActivity() {
 
     private fun createRecycleView() {
         rvExp.adapter = MyAdapter()
+//        val divider = DividerItemDecorationWithStartMargin()
+//        rvExp.addItemDecoration(divider)
         rvExp.layoutManager = LinearLayoutManager(this)
+
     }
 
 
     class MyAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-        private val fakeList = listOf<DynamicTypeData>(
-            DynamicTypeData.ImageData(),
-            DynamicTypeData.SampleDate(TEXT_FULL),
-            DynamicTypeData.SampleDate(TEXT_FULL),
-            DynamicTypeData.SampleDate(TEXT_SHORT),
-            DynamicTypeData.SampleDate(TEXT_LINE_SHORT),
-            DynamicTypeData.SampleDate(TEXT_NO_SPACE),
-            DynamicTypeData.SampleDate(TEXT_NO_SPACE_THAI),
-            DynamicTypeData.SampleDate(TEXT_THAI),
-            DynamicTypeData.SampleDate(TEXT_NEW_LINE),
-            DynamicTypeData.SampleDate(TEXT_FULL),
-            DynamicTypeData.ImageData(),
+        private val listSampleDate = listOf<DynamicTypeData.SampleDate>(
             DynamicTypeData.SampleDate(TEXT_FULL),
             DynamicTypeData.SampleDate(TEXT_FULL),
             DynamicTypeData.SampleDate(TEXT_SHORT),
             DynamicTypeData.SampleDate(TEXT_FULL),
-            DynamicTypeData.SampleDate(TEXT_NEW_LINE),
-            DynamicTypeData.SampleDate(TEXT_FULL),
-            DynamicTypeData.SampleDate(TEXT_FULL),
-            DynamicTypeData.SampleDate(TEXT_NEW_LINE),
-            DynamicTypeData.SampleDate(TEXT_FULL),
-            DynamicTypeData.SampleDate(TEXT_SHORT),
-            DynamicTypeData.SampleDate(TEXT_NEW_LINE),
-            DynamicTypeData.SampleDate(TEXT_FULL),
-            DynamicTypeData.SampleDate(TEXT_FULL),
-            DynamicTypeData.SampleDate(TEXT_SHORT),
-            DynamicTypeData.SampleDate(TEXT_SHORT),
             DynamicTypeData.SampleDate(TEXT_FULL)
+
+            )
+        private val fakeList = listOf<DynamicTypeData>(
+//            DynamicTypeData.ImageData(),
+//            DynamicTypeData.SampleDate(TEXT_FULL),
+//            DynamicTypeData.SampleDate(TEXT_FULL),
+//            DynamicTypeData.SampleDate(TEXT_SHORT),
+//            DynamicTypeData.RecommendData(),
+//            DynamicTypeData.RecommendData(),
+            DynamicTypeData.RecommendData(listSampleDate),
+            DynamicTypeData.ImageData()
+
+
+//            DynamicTypeData.SampleDate(TEXT_LINE_SHORT),
+//            DynamicTypeData.SampleDate(TEXT_THAI),
+//            DynamicTypeData.SampleDate(TEXT_NEW_LINE),
+//            DynamicTypeData.SampleDate(TEXT_FULL),
+//            DynamicTypeData.ImageData(),
+//            DynamicTypeData.SampleDate(TEXT_FULL),
+//            DynamicTypeData.SampleDate(TEXT_FULL),
+//            DynamicTypeData.SampleDate(TEXT_SHORT),
+//            DynamicTypeData.SampleDate(TEXT_FULL),
+//            DynamicTypeData.SampleDate(TEXT_NEW_LINE),
+//            DynamicTypeData.SampleDate(TEXT_FULL),
+//            DynamicTypeData.SampleDate(TEXT_FULL),
+//            DynamicTypeData.SampleDate(TEXT_NEW_LINE),
+//            DynamicTypeData.SampleDate(TEXT_FULL),
+//            DynamicTypeData.SampleDate(TEXT_SHORT),
+//            DynamicTypeData.SampleDate(TEXT_NEW_LINE),
+//            DynamicTypeData.SampleDate(TEXT_FULL),
+//            DynamicTypeData.SampleDate(TEXT_FULL),
+//            DynamicTypeData.SampleDate(TEXT_SHORT),
+//            DynamicTypeData.SampleDate(TEXT_SHORT),
+//            DynamicTypeData.SampleDate(TEXT_FULL)
 
         )
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
             return when (viewType) {
-                R.layout.item_recommand_detail -> {
-                    //R.layout.item_sample_expand -> {
+                R.layout.item_sample_expand -> {
                     MyViewHolder(
                         LayoutInflater.from(parent.context).inflate(
-                            R.layout.item_recommand_detail,
-                            //R.layout.item_sample_expand,
+                            R.layout.item_sample_expand,
+                            parent,
+                            false
+                        )
+                    )
+                }
+                R.layout.item_recommand_detail -> {
+//                    MyViewHolderRecommend(
+//                        LayoutInflater.from(parent.context).inflate(
+//                            R.layout.item_recommand_detail,
+//                            parent,
+//                            false
+//                        )
+//                    )
+                    MyViewHolderRecommendV2(
+                        LayoutInflater.from(parent.context).inflate(
+                            R.layout.item_contain_main,
                             parent,
                             false
                         )
@@ -130,6 +159,14 @@ class MainActivity : AppCompatActivity() {
                 is DynamicTypeData.ImageData -> {
 
                 }
+
+                is DynamicTypeData.RecommendData -> {
+                    val data = fakeList[position] as DynamicTypeData.RecommendData
+                    val sampleHoleder = holder as MyViewHolderRecommendV2
+                    sampleHoleder.binData(data.list) {state,index->
+                        data.list[index].isExpand = state
+                    }
+                }
             }
         }
 
@@ -137,7 +174,8 @@ class MainActivity : AppCompatActivity() {
 
         override fun getItemViewType(position: Int): Int {
             return when (fakeList[position]) {
-                is DynamicTypeData.SampleDate -> R.layout.item_recommand_detail//R.layout.item_sample_expand
+                is DynamicTypeData.SampleDate -> R.layout.item_sample_expand
+                is DynamicTypeData.RecommendData -> R.layout.item_recommand_detail
                 else -> R.layout.item_image_detail
             }
         }
@@ -145,7 +183,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     class MyViewHolder(private val iv: View) : RecyclerView.ViewHolder(iv) {
-        private val expTextView: CustomExpandText = iv.tvExp//iv.tvExp
+        private val expTextView: CustomExpandText = iv.tvExp
 
         fun bindPosition(
             data: DynamicTypeData.SampleDate,
@@ -165,11 +203,47 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    class MyViewHolderRecommend(private val iv: View) : RecyclerView.ViewHolder(iv) {
+
+    }
+
+
+    class MyViewHolderRecommendV2(private val iv: View) : RecyclerView.ViewHolder(iv) {
+
+        var containMainView: LinearLayout = iv.containerMain
+
+        fun binData(list: List<DynamicTypeData.SampleDate>, onUpdate: (newState: Boolean,index:Int) -> Unit) {
+            list.forEachIndexed { index, dynamicTypeData ->
+                val inflater =
+                    iv.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+
+                val popup = inflater.inflate(R.layout.item_recommand_detail, null)
+                val expTextView = popup.findViewById<CustomExpandText>(R.id.tvExp)
+                expTextView.setExpandableText(dynamicTypeData.deteail)
+                expTextView.isExpand = false
+                expTextView.onStateChangeListener = { oldState, newState ->
+                    onUpdate.invoke(newState,index)
+                }
+//                if (x==10){
+//                    val divider = popup.findViewById<View>(R.id.divider)
+//                    divider.visibility = View.GONE
+//                }
+                containMainView.addView(popup)
+            }
+
+
+        }
+
+
+    }
+
     sealed class DynamicTypeData {
         data class SampleDate(val deteail: String, var isExpand: Boolean = false) :
             DynamicTypeData()
 
         data class ImageData(val deteail: String = "") : DynamicTypeData()
+
+        data class RecommendData(val list: List<SampleDate>) : DynamicTypeData()
 
     }
 }
