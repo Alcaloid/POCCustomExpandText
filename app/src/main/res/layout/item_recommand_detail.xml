@@ -64,13 +64,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="fonts/db_heavent_medium.ttf"
+                android:visibility="gone"
                 app:expandableMaxLine="3" />
+
+            <com.poc.custom.expandtext.ui.CustomTextButtonExpand
+                android:id="@+id/tvCustom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
             <TextView
                 android:id="@+id/testja"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
+                android:visibility="gone"
                 android:fontFamily="fonts/db_heavent_medium.ttf"
                 android:maxLines="3" />
         </LinearLayout>

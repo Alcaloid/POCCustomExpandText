@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.poc.custom.expandtext.ui.CustomExpandText
+import com.poc.custom.expandtext.ui.CustomTextButtonExpand
 import kotlinx.android.synthetic.main.activity_main.rvExp
 import kotlinx.android.synthetic.main.item_contain_main.view.containerMain
 import kotlinx.android.synthetic.main.item_sample_expand.view.tvExp
@@ -253,6 +254,12 @@ class MainActivity : AppCompatActivity() {
 //                    val divider = popup.findViewById<View>(R.id.divider)
 //                    divider.visibility = View.GONE
 //                }
+
+                val expTextView3 = popup.findViewById<CustomTextButtonExpand>(R.id.tvCustom)
+                expTextView3.setExpandableText(dynamicTypeData.deteail)
+                expTextView3.onStateChangeListener = { oldState, newState ->
+                    onUpdate.invoke(newState, index)
+                }
                 containMainView.addView(popup)
             }
 
