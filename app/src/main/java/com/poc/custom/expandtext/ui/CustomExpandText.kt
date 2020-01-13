@@ -7,6 +7,7 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.util.AttributeSet
+import android.util.Log
 import androidx.appcompat.widget.AppCompatTextView
 import com.poc.custom.expandtext.R
 
@@ -19,7 +20,7 @@ class CustomExpandText @JvmOverloads constructor(
         private const val DEFAULT_IS_EXPAND = false
         private const val DEFAULT_NEED_EXPAND_ONE_TIME = false
         private const val DEFAULT_MAX_LINE = 3
-        private const val DEFAULT_EXPAND_TEXT = "... See More"
+        private const val DEFAULT_EXPAND_TEXT = "...See More"
         private const val DEFAULT_EXPAND_Color = Color.BLUE
     }
 
@@ -93,13 +94,13 @@ class CustomExpandText @JvmOverloads constructor(
             textView.lineCount >= maxLine -> {
                 val expandText = expandMoreText
                 val lineEndIndex = textView.layout.getLineEnd(maxLine - 1)
-                val wordDefault = if (lineEndIndex <= expandText.length) {
-                    textView.text.subSequence(0, lineEndIndex - 1).toString()
+                val wordDefault = if (!isEnoughWordLastLine(lineEndIndex, expandText.length)) {
+                    textView.text.subSequence(0, lineEndIndex).toString().trim()
                 } else {
                     textView.text.subSequence(
                         0,
                         lineEndIndex - expandText.length
-                    ).toString()
+                    ).toString().trim()
                 }
                 val wordMore = SpannableString(expandText).also {
                     it.setSpan(
@@ -139,5 +140,27 @@ class CustomExpandText @JvmOverloads constructor(
             )
             it.recycle()
         }
+    }
+
+    private fun isEnoughWordLastLine(startLength: Int, expandTextLength: Int): Boolean {
+        return if (isEnoughSpace(startLength, expandTextLength)) {
+            isEnoughCharacter(startLength, expandTextLength)
+        } else {
+            false
+        }
+    }
+
+    private fun isEnoughSpace(startLength: Int, expandTextLength: Int): Boolean {
+        return startLength > expandTextLength
+    }
+
+    private fun isEnoughCharacter(startLength: Int, expandTextLength: Int): Boolean {
+        val target = text.subSequence(startLength - expandTextLength, startLength)
+        target.forEach {
+            if (it == '\n') {
+                return false
+            }
+        }
+        return true
     }
 }

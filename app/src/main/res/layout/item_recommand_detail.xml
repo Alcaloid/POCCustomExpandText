@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#ffffff"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="#ffffff">
+
     <LinearLayout
         android:id="@+id/top"
         android:layout_width="match_parent"
@@ -49,8 +50,6 @@
                 android:textColor="#000000"
                 android:textSize="18sp" />
 
-            <include layout="@layout/item_sample_expand"/>
-
             <RatingBar
                 android:id="@+id/rate"
                 style="@style/CustomRatingBar"
@@ -64,16 +63,25 @@
                 android:id="@+id/tvExp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="fonts/db_heavent_medium.ttf"
                 app:expandableMaxLine="3" />
+
+            <TextView
+                android:id="@+id/testja"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="fonts/db_heavent_medium.ttf"
+                android:maxLines="3" />
         </LinearLayout>
     </LinearLayout>
 
 
     <View
         android:id="@+id/divider"
-        android:layout_below="@id/top"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#EAE7EC"
-        android:layout_marginStart="@dimen/default_margin_16"/>
+        android:layout_below="@id/top"
+        android:layout_marginStart="@dimen/default_margin_16"
+        android:background="#EAE7EC" />
 </RelativeLayout>

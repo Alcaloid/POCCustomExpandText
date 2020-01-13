@@ -6,14 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.poc.custom.expandtext.ui.CustomExpandText
-import com.poc.custom.expandtext.ui.DividerItemDecorationWithStartMargin
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.item_contain_main.view.*
-import kotlinx.android.synthetic.main.item_sample_expand.view.*
+import kotlinx.android.synthetic.main.activity_main.rvExp
+import kotlinx.android.synthetic.main.item_contain_main.view.containerMain
+import kotlinx.android.synthetic.main.item_sample_expand.view.tvExp
 
 
 class MainActivity : AppCompatActivity() {
@@ -40,6 +40,18 @@ class MainActivity : AppCompatActivity() {
         const val TEXT_THAI = "ขอให้ช่วงเวลาอันแสนดีของปีนี้\n" +
                 "โอบวันคืนของเธอให้อุ่นด้วยความงดงาม\n" +
                 "ความรักและความสุข สุขสันต์วันคริสต์มาส และสวัสดีปีใหม่"
+        const val TEXT_NUMBER =
+            "12347598723984718974198389137810470491284901849018094810980938129038109389012839021839018901849017041704919038102310487120837103913907120387138071803710301287308147398190381"
+        const val TEXT_ENGLISH =
+            "diasgduasbfiuabudadbaiyfbaihcbihabciuabdsiuabdiubauidbasidbiabdiuabduandnafiabfbayduadiaudhaosdbaidiaudobadiahvdiabduabdiaubdiabdiuabduabdibauidbaiudbuiabduabduiabduabdiuabdiuabdiuab"
+        const val TEXT_BIG_ENGLISH =
+            "DFOJBNFDJABDKJADBNJAKDBHKDBASKDBAFBU3HQODNOBDUISABFKJANCJNBAKJCNOIAJXIAJDPADOJDPAJFOIAIDNADBNAIDBFIAUSNDIONASONAIONDIOPANDPIANDPIANDPIONAPODAPDADAPDNADNALKNKLANFLKANLNXNXNDPINADANDAN"
+        const val TEXT_NUMBER_THAI =
+            "ไก่จิกเด็กไม่ตายเด็กเลยกัดไก่บนปากโอ่งไก่ร้องโอดครวญแล้วจิกเด็กกลับบนปากโอ่ง120482783013เด็กเสียชีวิตจึงเป็นไก่จิกเด็กตายบนปากโอ่ง12312312121ไก่จิกเด็กตายบนปากโอ่ง12312312121ไก่จิกเด็กตายบนปากโอ่ง12312312121"
+        const val TEXT_SPACE_THAI =
+            "ไก่ ไข่ ไร ไม่ ใจ ไอ้ ไก่ ไข่ ไร ไม่ ใจ ไอ้ ไก่ ไข่ ไร ไม่ ใจ ไอ้ ไก่ ไข่ ไร ไม่ ใจ ไอ้ ไก่ ไข่ ไร ไม่ ใจ ไอ้ ไก่ ไข่ ไร ไม่ ใจ ไอ้ ไก่ ไข่ ไร ไม่ ใจ ไอ้ ไก่ ไข่ ไร ไม่ ใจ ไอ้ ไก่ ไข่ ไร ไม่ ใจ ไอ้ ไก่ ไข่ ไร ไม่ ใจ ไอ้ ไก่ ไข่ ไร ไม่ ใจ ไอ้"
+        const val TEXT_LONG_THAI =
+            "หกฟืหกฟสกืฟสดืนฟืนรืๆนกืสาหทฟสากทฟกาทฟวากฟทสกทฟากทดสาฟ่กสฟ้ดส่ฟืสกืฟสก่ฟหวก่ฟสวก่ฟสวหก่วฟสก่วฟด่สวฟด่สวฟห่กสวฟ่วสก่ฟวก่ฟสวก่สวฟก่สฟวก่ฟสว่าสฟืกาสฟกืาสฟกืสฟืกสาฟกืสาืนๆืไนืกนๆืนรๆืกนรฟืกนฟืก"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,9 +77,17 @@ class MainActivity : AppCompatActivity() {
             DynamicTypeData.SampleDate(TEXT_FULL),
             DynamicTypeData.SampleDate(TEXT_SHORT),
             DynamicTypeData.SampleDate(TEXT_FULL),
-            DynamicTypeData.SampleDate(TEXT_FULL)
+            DynamicTypeData.SampleDate(TEXT_NEW_LINE),
+            DynamicTypeData.SampleDate(TEXT_THAI),
+            DynamicTypeData.SampleDate(TEXT_NUMBER),
+            DynamicTypeData.SampleDate(TEXT_NUMBER_THAI),
+            DynamicTypeData.SampleDate(TEXT_ENGLISH),
+            DynamicTypeData.SampleDate(TEXT_BIG_ENGLISH),
+            DynamicTypeData.SampleDate(TEXT_SPACE_THAI),
+            DynamicTypeData.SampleDate(TEXT_LONG_THAI),
+            DynamicTypeData.SampleDate(TEXT_NUMBER)
 
-            )
+        )
         private val fakeList = listOf<DynamicTypeData>(
 //            DynamicTypeData.ImageData(),
 //            DynamicTypeData.SampleDate(TEXT_FULL),
@@ -149,11 +169,11 @@ class MainActivity : AppCompatActivity() {
             when (fakeList[position]) {
                 is DynamicTypeData.SampleDate -> {
                     val data = fakeList[position] as DynamicTypeData.SampleDate
-                    val sampleHoleder = holder as MyViewHolder
-                    sampleHoleder.bindPosition(data) {
+                    val sampleHolder = holder as MyViewHolder
+                    sampleHolder.bindPosition(data) {
                         data.isExpand = it
                     }
-                    sampleHoleder.setIsRecyclable(false)
+                    sampleHolder.setIsRecyclable(false)
 
                 }
                 is DynamicTypeData.ImageData -> {
@@ -162,8 +182,8 @@ class MainActivity : AppCompatActivity() {
 
                 is DynamicTypeData.RecommendData -> {
                     val data = fakeList[position] as DynamicTypeData.RecommendData
-                    val sampleHoleder = holder as MyViewHolderRecommendV2
-                    sampleHoleder.binData(data.list) {state,index->
+                    val sampleHolder = holder as MyViewHolderRecommendV2
+                    sampleHolder.binData(data.list) { state, index ->
                         data.list[index].isExpand = state
                     }
                 }
@@ -212,7 +232,10 @@ class MainActivity : AppCompatActivity() {
 
         var containMainView: LinearLayout = iv.containerMain
 
-        fun binData(list: List<DynamicTypeData.SampleDate>, onUpdate: (newState: Boolean,index:Int) -> Unit) {
+        fun binData(
+            list: List<DynamicTypeData.SampleDate>,
+            onUpdate: (newState: Boolean, index: Int) -> Unit
+        ) {
             list.forEachIndexed { index, dynamicTypeData ->
                 val inflater =
                     iv.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -222,8 +245,10 @@ class MainActivity : AppCompatActivity() {
                 expTextView.setExpandableText(dynamicTypeData.deteail)
                 expTextView.isExpand = false
                 expTextView.onStateChangeListener = { oldState, newState ->
-                    onUpdate.invoke(newState,index)
+                    onUpdate.invoke(newState, index)
                 }
+                val expTextView2 = popup.findViewById<TextView>(R.id.testja)
+                expTextView2.text = dynamicTypeData.deteail
 //                if (x==10){
 //                    val divider = popup.findViewById<View>(R.id.divider)
 //                    divider.visibility = View.GONE
