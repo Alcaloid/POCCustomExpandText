@@ -7,7 +7,6 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.util.AttributeSet
-import android.util.Log
 import androidx.appcompat.widget.AppCompatTextView
 import com.poc.custom.expandtext.R
 
@@ -40,6 +39,7 @@ class CustomExpandText @JvmOverloads constructor(
     private var expandMoreColor: Int = DEFAULT_EXPAND_Color
     private var needExpandOneTime: Boolean = DEFAULT_NEED_EXPAND_ONE_TIME
     private var expandOneTime: Boolean = false
+    private var MoreThanMaxLine: Boolean = false
     private var originalText: CharSequence? = null
 
     init {
@@ -91,15 +91,13 @@ class CustomExpandText @JvmOverloads constructor(
     private fun makeTextViewResizable(maxLine: Int) {
         val textView = this
         when {
-            textView.lineCount >= maxLine -> {
-                Log.d("ExpandText","Coming?")
+            textView.lineCount > maxLine || (textView.lineCount == maxLine && MoreThanMaxLine) -> {
+                MoreThanMaxLine = true
                 val expandText = expandMoreText
                 val lineEndIndex = textView.layout.getLineEnd(maxLine - 1)
                 val wordDefault = if (!isEnoughWordLastLine(lineEndIndex, expandText.length)) {
-                    Log.d("ExpandText","Come!")
                     textView.text.subSequence(0, lineEndIndex).toString().trim()
                 } else {
-                    Log.d("ExpandText","Coming???")
                     textView.text.subSequence(
                         0,
                         lineEndIndex - expandText.length
@@ -115,7 +113,6 @@ class CustomExpandText @JvmOverloads constructor(
                 }
                 textView.text = wordDefault
                 textView.append(wordMore)
-                Log.d("ExpandText","TEXTEnd:${text}")
             }
             else -> {
                 textView.text = originalText
