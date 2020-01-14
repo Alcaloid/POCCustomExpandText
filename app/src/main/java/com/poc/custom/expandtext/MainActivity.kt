@@ -51,14 +51,15 @@ class MainActivity : AppCompatActivity() {
                 "หลักการทับศัพท์จะตกไปทันที หากคำคำนั้นมีบันทึกอยู่ในพจนานุกรมอยู่แล้ว \n" +
                 "แต่คำใดก็ตาม ที่ไม่มีในพจนานุกรมของราชบัณฑิตฯ ก็ต้องมาเข้ากระบวนการทับศัพท์ก่อนทุกคำครับ"
         const val TEXT_THAI_WITHOUT_SPACE =
-            "Afghanistan~Albania~Algeria~Andorra~Angola~Antigua~Barbuda~Argentina~Armenia~Australia~Austria~Azerbaijan~Bahamas~Bahrain~Bangladesh~Barbados~Belarus~Belgium~Belize~Benin~Bhutan~Bolivia~BosniaHerzegovina~Botswana~Brazil~Brunei~Bulgaria~Burkina~Faso~Burundi~Cambodia~Cameroon~Canada~Cape~Verde~Central~African~Republic~Chad~Chile~China~Colombia~Comorros~Congo~Costa~Rica~Cote~dIvoire~Croatia~Cuba~Cyprus~Czech~Republic~Democratic~Republic~of~the~Congo~Denmark~Djibouti~Dominica~Dominican~Republic~East~Timor~Ecuador~Egypt~El~Salvador~Equatorial~Guinea~Eritrea~Estonia~Ethiopia~Fiji~Finland~France~Gabon~Gambia~Georgia~Germany~Ghana~Greece~Grenada~Guatemala~Guinea~Guinea-"
-        const val TEXT_THAI_NOT_ENOUGH_SPACE = "Start\n1\n2\n3\n4\n5\nEnd"
-        const val TEXT_THAI_NOT_ENOUGH_CHAR = "D\ne\ns\ntina\nt\ni\ni\no\nn"
-        const val TEXT_THAI_ENOUGH_MAX_LINE = "How best to make use of comments is\n" +
-                "In computer programming, a comment\n" +
-                "A good title must be compelling \n" +
-                "Apart from that, the title page\n" +
-                "You may also see"
+            "ตอนนี้ผมอายุ18ปีอยากลดน้ำหนักสัก10กิโลภายใน3เดือนช่วยแนะนำผมหน่อยครับของคุณครับแม้จะอ่านเข้าใจได้ตามที่เจ้าของกระทู้ต้องการสื่อแต่มันทำให้ปวดตาชะมัดยิ่งถ้าได้อ่านเรื่องราวยาว ๆ ลองคิดดูว่าจะรู้สึกหงุดหงิดแค่ไหนในการเขียนหรือพิมพ์หนังสือไทย การเว้นช่องว่างระหว่างคำ ข้อความ หรือประโยคให้ถูกต้องเป็นสิ่งจำเป็นมาก เพราะจะทำให้ข้อเขียนนั้นมีความถูกต้อง แจ่มแจ้ง ชัดเจน และอ่านได้ตรงตามความต้องการของผู้เขียน  ลองมาดูตัวอย่างประโยคข้างล่างนี้ แล้วทุกคนจะยอมรับว่า แค่เว้นวรรคผิด ความหมายก็เปลี่ยนไปโดยสิ้นเชิง"
+        const val TEXT_THAI_NOT_ENOUGH_SPACE = "เริ่ม\n1\n2\n3\n4\n5\nจบ"
+        const val TEXT_THAI_NOT_ENOUGH_CHAR = "หวัง\nว่า\nมัน\nจะ\nไม่พังนะ\nครับ\nผม"
+        const val TEXT_THAI_ENOUGH_MAX_LINE =
+            "1. สิบล้อชนกระบะ หมูตาย 3 เจ็บ 10  \n" +
+                    "2. ไม่เจอกันนาน นมโตขึ้นเป็นกอง\n" +
+                    "3. ยาขนานนี้กินแล้วแข็ง แรงไม่มี\n" +
+                    "4. ยาหม้อนี้ปรุงด้วยสมุนไพรหลายอย่าง\n" +
+                    "5. ห้ามพนักงานหญิงนุ่งกางเกงใน วันนี้\n"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -85,7 +86,15 @@ class MainActivity : AppCompatActivity() {
             DynamicTypeData.SampleDate(TEXT_NUMBER),
             DynamicTypeData.SampleDate(TEXT_ENG_NOT_ENOUGH_SPACE),
             DynamicTypeData.SampleDate(TEXT_ENG_NOT_ENOUGH_CHAR),
-            DynamicTypeData.SampleDate(TEXT_ENG_WITHOUT_SPACE)
+            DynamicTypeData.SampleDate(TEXT_ENG_WITHOUT_SPACE),
+
+            DynamicTypeData.SampleDate(TEXT_NOT_MAX_LINE_THAI),
+            DynamicTypeData.SampleDate(TEXT_LONG_WITHOUT_NEW_LINE_THAI),
+            DynamicTypeData.SampleDate(TEXT_WITH_NEW_LINE_THAI),
+            DynamicTypeData.SampleDate(TEXT_THAI_WITHOUT_SPACE),
+            DynamicTypeData.SampleDate(TEXT_THAI_NOT_ENOUGH_SPACE),
+            DynamicTypeData.SampleDate(TEXT_THAI_NOT_ENOUGH_CHAR),
+            DynamicTypeData.SampleDate(TEXT_THAI_ENOUGH_MAX_LINE)
         )
         private val listNewSampleData = listOf<DynamicTypeData.SampleDate>(
             DynamicTypeData.SampleDate(TEXT_NOT_MAX_LINE_ENG),

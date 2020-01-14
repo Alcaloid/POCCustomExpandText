@@ -7,6 +7,7 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.util.AttributeSet
+import android.widget.TextView
 import androidx.appcompat.widget.AppCompatTextView
 import com.poc.custom.expandtext.R
 
@@ -92,7 +93,8 @@ class CustomExpandText @JvmOverloads constructor(
         val textView = this
         when {
             textView.lineCount > maxLine || (textView.lineCount == maxLine && MoreThanMaxLine) -> {
-                MoreThanMaxLine = true
+                MoreThanMaxLine =
+                    true // protect text have real linecount == maxline because when collapse text linecount == maxline
                 val expandText = expandMoreText
                 val lineEndIndex = textView.layout.getLineEnd(maxLine - 1)
                 val wordDefault = if (!isEnoughWordLastLine(lineEndIndex, expandText.length)) {
@@ -113,9 +115,14 @@ class CustomExpandText @JvmOverloads constructor(
                 }
                 textView.text = wordDefault
                 textView.append(wordMore)
+                if (isExpandTextNotDrop(maxLine)) {
+                    val fixedWord = getNewFixedText(textView, maxLine, wordDefault)
+                    textView.text = fixedWord
+                    textView.append(wordMore)
+                }
             }
             else -> {
-                textView.text = originalText
+                textView.text = originalText?.trim()
             }
         }
     }
@@ -141,6 +148,26 @@ class CustomExpandText @JvmOverloads constructor(
             )
             it.recycle()
         }
+    }
+
+    private fun getNewFixedText(textView: TextView, maxLine: Int, wordCollapse: String): String {
+        //if expand text drop to another line
+        val lastLine = textView.layout.getLineEnd(maxLine - 2)
+        val fixedWord = wordCollapse.subSequence(0, lastLine).toString().trim() + "\n"
+        var count = 1
+        while (lineCount > maxLine && count <= 10) {
+            //count < 10 to protect infinite loop
+            val newWord =
+                wordCollapse.subSequence(lastLine, wordCollapse.length - count).toString()
+                    .trim()
+            count += 1
+            return "$fixedWord$newWord"
+        }
+        return wordCollapse
+    }
+
+    private fun isExpandTextNotDrop(maxLine: Int): Boolean {
+        return lineCount > maxLine
     }
 
     private fun isEnoughWordLastLine(startLength: Int, expandTextLength: Int): Boolean {
