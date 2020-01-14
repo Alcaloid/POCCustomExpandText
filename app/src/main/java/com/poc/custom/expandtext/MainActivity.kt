@@ -90,12 +90,6 @@ class MainActivity : AppCompatActivity() {
 
         )
         private val fakeList = listOf<DynamicTypeData>(
-//            DynamicTypeData.ImageData(),
-//            DynamicTypeData.SampleDate(TEXT_FULL),
-//            DynamicTypeData.SampleDate(TEXT_FULL),
-//            DynamicTypeData.SampleDate(TEXT_SHORT),
-//            DynamicTypeData.RecommendData(),
-//            DynamicTypeData.RecommendData(),
             DynamicTypeData.RecommendData(listSampleDate),
             DynamicTypeData.ImageData()
 
@@ -137,13 +131,6 @@ class MainActivity : AppCompatActivity() {
                     )
                 }
                 R.layout.item_recommand_detail -> {
-//                    MyViewHolderRecommend(
-//                        LayoutInflater.from(parent.context).inflate(
-//                            R.layout.item_recommand_detail,
-//                            parent,
-//                            false
-//                        )
-//                    )
                     MyViewHolderRecommendV2(
                         LayoutInflater.from(parent.context).inflate(
                             R.layout.item_contain_main,
@@ -162,11 +149,9 @@ class MainActivity : AppCompatActivity() {
                     )
                 }
             }
-
         }
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
             when (fakeList[position]) {
                 is DynamicTypeData.SampleDate -> {
                     val data = fakeList[position] as DynamicTypeData.SampleDate
@@ -216,9 +201,7 @@ class MainActivity : AppCompatActivity() {
                 onUpdate.invoke(newState)
             }
         }
-
     }
-
 
     class MyViewHolderImage(private val iv: View) : RecyclerView.ViewHolder(iv) {
 
@@ -242,31 +225,15 @@ class MainActivity : AppCompatActivity() {
                     iv.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
                 val popup = inflater.inflate(R.layout.item_recommand_detail, null)
-                val expTextView = popup.findViewById<CustomExpandText>(R.id.tvExp)
-                expTextView.setExpandableText(dynamicTypeData.deteail)
-                expTextView.isExpand = false
-                expTextView.onStateChangeListener = { oldState, newState ->
-                    onUpdate.invoke(newState, index)
-                }
-                val expTextView2 = popup.findViewById<TextView>(R.id.testja)
-                expTextView2.text = dynamicTypeData.deteail
-//                if (x==10){
-//                    val divider = popup.findViewById<View>(R.id.divider)
-//                    divider.visibility = View.GONE
-//                }
-
                 val expTextView3 = popup.findViewById<CustomTextButtonExpand>(R.id.tvCustom)
                 expTextView3.setExpandableText(dynamicTypeData.deteail)
+//                expTextView3.setExpandOneTime(true)
                 expTextView3.onStateChangeListener = { oldState, newState ->
                     onUpdate.invoke(newState, index)
                 }
                 containMainView.addView(popup)
             }
-
-
         }
-
-
     }
 
     sealed class DynamicTypeData {
@@ -274,8 +241,6 @@ class MainActivity : AppCompatActivity() {
             DynamicTypeData()
 
         data class ImageData(val deteail: String = "") : DynamicTypeData()
-
         data class RecommendData(val list: List<SampleDate>) : DynamicTypeData()
-
     }
 }
