@@ -1,42 +1,56 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="wrap_content"-->
-<!--    xmlns:card_view="http://schemas.android.com/tools"-->
-<!--    app:cardBackgroundColor="@android:color/white"-->
-<!--    card_view:cardBackgroundColor="@android:color/white"-->
-<!--    xmlns:app="http://schemas.android.com/apk/res-auto">-->
-
-<LinearLayout android:layout_width="match_parent"
+<?xml version="1.0" encoding="utf-8"?><!--<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="#ffffff"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:background="#ffffff">
 
-        <TextView
-            android:id="@+id/txt_testja"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ttile"
-            android:padding="4dp"
-            android:ellipsize="end"
-            android:maxLines="5"
-            android:textStyle="bold"/>
+    <ImageView
+        android:id="@+id/img_avatar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        app:srcCompat="@drawable/ic_android_black_24dp" />
 
-    <TextView
-        android:id="@+id/txt_show_max_line"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="See More"
-        android:visibility="gone"
-        android:textColor="#90CAF9"
-        />
+        android:layout_toEndOf="@+id/img_avatar"
+        android:orientation="vertical"
+        android:padding="20dp">
 
-        <View
+        <TextView
+            android:id="@+id/txt_command_name"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#000000"/>
+            android:layout_height="wrap_content"
+            android:text="NameOfReComment"
+            android:textColor="#000000"
+            android:textSize="18sp" />
 
+        <RatingBar
+            android:id="@+id/rate"
+            style="@style/CustomRatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:rating="4" />
+
+        <com.poc.custom.expandtext.ui.CustomTextButtonExpand
+            android:id="@+id/tvCustom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
-<!--</androidx.cardview.widget.CardView>-->
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/default_margin_16"
+        android:background="#EAE7EC" />
+</RelativeLayout>

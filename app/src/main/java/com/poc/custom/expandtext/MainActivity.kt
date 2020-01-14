@@ -100,7 +100,7 @@ class MainActivity : AppCompatActivity() {
 
             return when (viewType) {
                 R.layout.item_sample_expand -> {
-                    MyViewHolder(
+                    MyViewHolderNewData(
                         LayoutInflater.from(parent.context).inflate(
                             R.layout.item_contain_main,
                             parent,
@@ -254,7 +254,7 @@ class MainActivity : AppCompatActivity() {
                 val inflater =
                     iv.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
-                val popup = inflater.inflate(R.layout.item_recommand_detail, null)
+                val popup = inflater.inflate(R.layout.item_sample_expand, null)
 
                 val expTextView3 = popup.findViewById<CustomTextButtonExpand>(R.id.tvCustom)
                 expTextView3.setExpandableText(dynamicTypeData.deteail)
