@@ -28,7 +28,7 @@
             android:id="@+id/txt_command_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="NameOfReComment"
+            android:text="SeeMoreInLine"
             android:textColor="#000000"
             android:textSize="18sp" />
 

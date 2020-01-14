@@ -88,10 +88,17 @@ class MainActivity : AppCompatActivity() {
             DynamicTypeData.SampleDate(TEXT_ENG_WITHOUT_SPACE)
         )
         private val listNewSampleData = listOf<DynamicTypeData.SampleDate>(
-            DynamicTypeData.SampleDate(TEXT_LONG_WITHOUT_NEW_LINE)
+            DynamicTypeData.SampleDate(TEXT_NOT_MAX_LINE_ENG),
+            DynamicTypeData.SampleDate(TEXT_ENG_ENOUGH_MAX_LINE),
+            DynamicTypeData.SampleDate(TEXT_LONG_WITHOUT_NEW_LINE),
+            DynamicTypeData.SampleDate(TEXT_WITH_NEW_LINE),
+            DynamicTypeData.SampleDate(TEXT_NUMBER),
+            DynamicTypeData.SampleDate(TEXT_ENG_NOT_ENOUGH_SPACE),
+            DynamicTypeData.SampleDate(TEXT_ENG_NOT_ENOUGH_CHAR),
+            DynamicTypeData.SampleDate(TEXT_ENG_WITHOUT_SPACE)
         )
         private val fakeList = listOf<DynamicTypeData>(
-            DynamicTypeData.SampleNewData(listNewSampleData),
+//            DynamicTypeData.SampleNewData(listNewSampleData),
             DynamicTypeData.RecommendData(listSampleDate),
             DynamicTypeData.ImageData()
         )
