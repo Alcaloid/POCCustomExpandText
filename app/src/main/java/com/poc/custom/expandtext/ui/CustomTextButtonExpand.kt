@@ -28,7 +28,7 @@ class CustomTextButtonExpand : LinearLayoutCompat {
     }
 
     companion object {
-        private const val DEFAULT_IS_EXPAND = false
+        private const val DEFAULT_IS_EXPAND = true
         private const val DEFAULT_NEED_EXPAND_ONE_TIME = false
         private const val DEFAULT_MAX_LINE = 5
         private const val DEFAULT_EXPAND_MORE_TEXT = "...See More"
@@ -64,7 +64,7 @@ class CustomTextButtonExpand : LinearLayoutCompat {
         orientation = VERTICAL
         gravity = Gravity.CENTER
         LayoutInflater.from(context).inflate(R.layout.custom_text_expand_view, this)
-//        ellipsizeText.setTextColor(expandMoreColor)
+        ellipsizeText.setTextColor(expandMoreColor)
         ellipsizeText.visibility = View.VISIBLE
         handleClickEllipsize()
     }
@@ -122,10 +122,10 @@ class CustomTextButtonExpand : LinearLayoutCompat {
     }
 
     private fun checkVisibilityEllipsizeText() {
-        if (mainText.lineCount > expandMaxLine && isExpand) {
+        if (mainText.lineCount > expandMaxLine && isExpand && !expandOneTime) {
             ellipsizeText.text = expandMoreText
             ellipsizeText.visibility = View.VISIBLE
-        } else if (!isExpand) {
+        } else if (!isExpand && !expandOneTime) {
             ellipsizeText.visibility = View.VISIBLE
             ellipsizeText.text = expandLessText
         } else {
@@ -134,13 +134,14 @@ class CustomTextButtonExpand : LinearLayoutCompat {
     }
 
     private fun updateText() {
-        if (isExpand) {
+        if (isExpand && !expandOneTime) {
             checkVisibilityEllipsizeText()
             mainText.maxLines = expandMaxLine
         } else {
-//            if (needExpandOneTime) {
-//                expandOneTime = true
-//            }
+            if (needExpandOneTime) {
+                expandOneTime = true
+                ellipsizeText.visibility = View.GONE
+            }
             checkVisibilityEllipsizeText()
             mainText.maxLines = Int.MAX_VALUE
         }
