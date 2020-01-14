@@ -15,16 +15,16 @@ import kotlinx.android.synthetic.main.custom_text_expand_view.view.mainText
 
 class CustomTextButtonExpand : LinearLayoutCompat {
     constructor(context: Context) : super(context) {
-        init()
+        init(context, null)
     }
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        init()
+        init(context, attrs)
     }
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) :
             super(context, attrs, defStyleAttr) {
-        init()
+        init(context, attrs)
     }
 
     companion object {
@@ -55,9 +55,9 @@ class CustomTextButtonExpand : LinearLayoutCompat {
     private var originalText: CharSequence? = null
 
 
-    private fun init() {
-//        initDataSetting(context, attrs)
+    private fun init(context: Context, attrs: AttributeSet?) {
         initCustomView()
+        initDataSetting(context, attrs)
     }
 
     private fun initCustomView() {
