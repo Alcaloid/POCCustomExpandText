@@ -24,7 +24,7 @@ class CustomTextButtonExpand : LinearLayoutCompat {
             super(context, attrs, defStyleAttr) {
     }
 
-    private var maxLine = 3
+    private var maxLine = 5
     private var originalText: CharSequence? = null
 
 
@@ -49,9 +49,11 @@ class CustomTextButtonExpand : LinearLayoutCompat {
         if (mainText.lineCount > maxLine && isExpand) {
             ellipsizeText.setText("See more")
             ellipsizeText.visibility = View.VISIBLE
-        } else {
+        } else if (!isExpand) {
             ellipsizeText.visibility = View.VISIBLE
             ellipsizeText.setText("...See less")
+        }else{
+            ellipsizeText.visibility = View.GONE
         }
     }
 
