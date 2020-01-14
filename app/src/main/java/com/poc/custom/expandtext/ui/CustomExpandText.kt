@@ -7,7 +7,6 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.util.AttributeSet
-import android.util.Log
 import androidx.appcompat.widget.AppCompatTextView
 import com.poc.custom.expandtext.R
 
@@ -20,7 +19,8 @@ class CustomExpandText @JvmOverloads constructor(
         private const val DEFAULT_IS_EXPAND = false
         private const val DEFAULT_NEED_EXPAND_ONE_TIME = false
         private const val DEFAULT_MAX_LINE = 3
-        private const val DEFAULT_EXPAND_TEXT = "...See More"
+        private const val DEFAULT_EXPAND_MORE_TEXT = "...See More"
+        private const val DEFAULT_EXPAND_LESS_TEXT = "See Less"
         private const val DEFAULT_EXPAND_Color = Color.BLUE
     }
 
@@ -36,7 +36,8 @@ class CustomExpandText @JvmOverloads constructor(
             updateText()
         }
     private var expandMaxLine: Int = DEFAULT_MAX_LINE
-    private var expandMoreText: String = DEFAULT_EXPAND_TEXT
+    private var expandMoreText: String = DEFAULT_EXPAND_MORE_TEXT
+    private var expandLessText: String = DEFAULT_EXPAND_LESS_TEXT
     private var expandMoreColor: Int = DEFAULT_EXPAND_Color
     private var needExpandOneTime: Boolean = DEFAULT_NEED_EXPAND_ONE_TIME
     private var expandOneTime: Boolean = false
@@ -60,8 +61,12 @@ class CustomExpandText @JvmOverloads constructor(
         needExpandOneTime = state
     }
 
-    fun setExpandMoreText(text: String) {
-        expandMoreText = text
+    fun setExpandText(
+        textMore: String = DEFAULT_EXPAND_MORE_TEXT,
+        textLess: String = DEFAULT_EXPAND_LESS_TEXT
+    ) {
+        expandMoreText = textMore
+        expandLessText = textLess
     }
 
     fun setExpandMoreColor(color: Int) {
@@ -133,7 +138,7 @@ class CustomExpandText @JvmOverloads constructor(
                 )
             expandMoreText = it.getString(
                 R.styleable.ExpandableTextView_expandableText
-            ) ?: DEFAULT_EXPAND_TEXT
+            ) ?: DEFAULT_EXPAND_MORE_TEXT
             expandMoreColor = it.getInt(
                 R.styleable.ExpandableTextView_expandableColorText,
                 DEFAULT_EXPAND_Color
