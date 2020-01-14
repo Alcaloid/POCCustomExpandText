@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.poc.custom.expandtext.ui.CustomExpandText
+import com.poc.custom.expandtext.ui.CustomTextButtonExpand
 import kotlinx.android.synthetic.main.activity_main.rvExp
 import kotlinx.android.synthetic.main.item_contain_main.view.containerMain
 import kotlinx.android.synthetic.main.item_recommand_detail.view.tvExp
@@ -101,7 +102,7 @@ class MainActivity : AppCompatActivity() {
                 R.layout.item_sample_expand -> {
                     MyViewHolder(
                         LayoutInflater.from(parent.context).inflate(
-                            R.layout.item_sample_expand,
+                            R.layout.item_contain_main,
                             parent,
                             false
                         )
@@ -148,6 +149,9 @@ class MainActivity : AppCompatActivity() {
                 is DynamicTypeData.SampleNewData -> {
                     val data = fakeList[position] as DynamicTypeData.SampleNewData
                     val sampleHolder = holder as MyViewHolderNewData
+                    sampleHolder.binData(data.list) { state, index ->
+                        data.list[index].isExpand = state
+                    }
                 }
 
                 is DynamicTypeData.RecommendData -> {
@@ -251,24 +255,12 @@ class MainActivity : AppCompatActivity() {
                     iv.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
                 val popup = inflater.inflate(R.layout.item_recommand_detail, null)
-                val expTextView = popup.findViewById<CustomExpandText>(R.id.tvExp)
-                expTextView.setExpandableText(dynamicTypeData.deteail)
-                expTextView.isExpand = false
-                expTextView.onStateChangeListener = { oldState, newState ->
+
+                val expTextView3 = popup.findViewById<CustomTextButtonExpand>(R.id.tvCustom)
+                expTextView3.setExpandableText(dynamicTypeData.deteail)
+                expTextView3.onStateChangeListener = { oldState, newState ->
                     onUpdate.invoke(newState, index)
                 }
-//                val expTextView2 = popup.findViewById<TextView>(R.id.testja)
-//                expTextView2.text = dynamicTypeData.deteail
-//                if (x==10){
-//                    val divider = popup.findViewById<View>(R.id.divider)
-//                    divider.visibility = View.GONE
-//                }
-
-//                val expTextView3 = popup.findViewById<CustomTextButtonExpand>(R.id.tvCustom)
-//                expTextView3.setExpandableText(dynamicTypeData.deteail)
-//                expTextView3.onStateChangeListener = { oldState, newState ->
-//                    onUpdate.invoke(newState, index)
-//                }
                 containMainView.addView(popup)
             }
         }
