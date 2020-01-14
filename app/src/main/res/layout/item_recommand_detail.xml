@@ -5,90 +5,69 @@
     android:layout_height="wrap_content"
     android:background="#ffffff">
 
+    <ImageView
+        android:id="@+id/img_avatar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        app:srcCompat="@drawable/ic_android_black_24dp" />
+
     <LinearLayout
-        android:id="@+id/top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:padding="20dp"
+        android:layout_toEndOf="@+id/img_avatar"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/txt_command_name"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.75"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:text="NameOfReComment"
+            android:textColor="#000000"
+            android:textSize="18sp" />
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                app:srcCompat="@drawable/ic_android_black_24dp" />
+        <RatingBar
+            android:id="@+id/rate"
+            style="@style/CustomRatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:rating="4" />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-
-        </LinearLayout>
-
-        <LinearLayout
+        <com.poc.custom.expandtext.ui.CustomExpandText
+            android:id="@+id/tvExp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.25"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="fonts/db_heavent_medium.ttf"
+            app:expandableMaxLine="5" />
 
-            <TextView
-                android:id="@+id/txt_command_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:text="NameOfReCommand"
-                android:textColor="#000000"
-                android:textSize="18sp" />
+        <!--            <com.poc.custom.expandtext.ui.CustomTextButtonExpand-->
+        <!--                android:id="@+id/tvCustom"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"/>-->
 
-            <RatingBar
-                android:id="@+id/rate"
-                style="@style/CustomRatingBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:rating="4" />
-
-            <com.poc.custom.expandtext.ui.CustomExpandText
-                android:id="@+id/tvExp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="fonts/db_heavent_medium.ttf"
-                android:visibility="gone"
-                app:expandableMaxLine="3" />
-
-            <com.poc.custom.expandtext.ui.CustomTextButtonExpand
-                android:id="@+id/tvCustom"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:id="@+id/testja"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:visibility="gone"
-                android:fontFamily="fonts/db_heavent_medium.ttf"
-                android:maxLines="3" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/testja"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="fonts/db_heavent_medium.ttf"
+            android:maxLines="3"
+            android:visibility="gone" />
     </LinearLayout>
-
 
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@id/top"
+        android:layout_alignParentBottom="true"
         android:layout_marginStart="@dimen/default_margin_16"
         android:background="#EAE7EC" />
 </RelativeLayout>

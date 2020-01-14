@@ -92,11 +92,14 @@ class CustomExpandText @JvmOverloads constructor(
         val textView = this
         when {
             textView.lineCount >= maxLine -> {
+                Log.d("ExpandText","Coming?")
                 val expandText = expandMoreText
                 val lineEndIndex = textView.layout.getLineEnd(maxLine - 1)
                 val wordDefault = if (!isEnoughWordLastLine(lineEndIndex, expandText.length)) {
+                    Log.d("ExpandText","Come!")
                     textView.text.subSequence(0, lineEndIndex).toString().trim()
                 } else {
+                    Log.d("ExpandText","Coming???")
                     textView.text.subSequence(
                         0,
                         lineEndIndex - expandText.length
@@ -112,6 +115,7 @@ class CustomExpandText @JvmOverloads constructor(
                 }
                 textView.text = wordDefault
                 textView.append(wordMore)
+                Log.d("ExpandText","TEXTEnd:${text}")
             }
             else -> {
                 textView.text = originalText
