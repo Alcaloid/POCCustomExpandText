@@ -14,17 +14,17 @@ import kotlinx.android.synthetic.main.custom_text_expand_view.view.mainText
 
 
 class CustomTextButtonExpand : LinearLayoutCompat {
-//    constructor(context: Context) : super(context) {
-//        init()
-//    }
+    constructor(context: Context) : super(context) {
+        init()
+    }
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        init(context, attrs)
+        init()
     }
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) :
             super(context, attrs, defStyleAttr) {
-        init(context, attrs)
+        init()
     }
 
     companion object {
@@ -55,8 +55,8 @@ class CustomTextButtonExpand : LinearLayoutCompat {
     private var originalText: CharSequence? = null
 
 
-    private fun init(context: Context, attrs: AttributeSet) {
-        initDataSetting(context, attrs)
+    private fun init() {
+//        initDataSetting(context, attrs)
         initCustomView()
     }
 
@@ -64,13 +64,13 @@ class CustomTextButtonExpand : LinearLayoutCompat {
         orientation = VERTICAL
         gravity = Gravity.CENTER
         LayoutInflater.from(context).inflate(R.layout.custom_text_expand_view, this)
-        ellipsizeText.setTextColor(expandMoreColor)
+//        ellipsizeText.setTextColor(expandMoreColor)
         ellipsizeText.visibility = View.VISIBLE
         handleClickEllipsize()
     }
 
     @SuppressLint("Recycle")
-    private fun initDataSetting(context: Context, attrs: AttributeSet) {
+    private fun initDataSetting(context: Context, attrs: AttributeSet?) {
         context.obtainStyledAttributes(attrs, R.styleable.ExpandableTextView).also {
             expandMaxLine =
                 it.getInt(R.styleable.ExpandableTextView_expandableMaxLine, DEFAULT_MAX_LINE)
@@ -134,13 +134,13 @@ class CustomTextButtonExpand : LinearLayoutCompat {
     }
 
     private fun updateText() {
-        if (isExpand && !expandOneTime) {
+        if (isExpand) {
             checkVisibilityEllipsizeText()
             mainText.maxLines = expandMaxLine
         } else {
-            if (needExpandOneTime) {
-                expandOneTime = true
-            }
+//            if (needExpandOneTime) {
+//                expandOneTime = true
+//            }
             checkVisibilityEllipsizeText()
             mainText.maxLines = Int.MAX_VALUE
         }
