@@ -2,10 +2,12 @@ package com.poc.custom.expandtext
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -203,6 +205,10 @@ class MainActivity : AppCompatActivity() {
             list: List<DynamicTypeData.SampleDate>,
             onUpdate: (newState: Boolean, index: Int) -> Unit
         ) {
+
+            iv.setOnClickListener {
+                Toast.makeText(it.context,"Click",Toast.LENGTH_SHORT).show()
+            }
             list.forEachIndexed { index, dynamicTypeData ->
                 val inflater =
                     iv.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
